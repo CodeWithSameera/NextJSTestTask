@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  nextjs-app:
+    image: test_nextjs-app
+    build:
+      context: ./web-landing-page    # Path to your Next.js app
+    ports:
+      - "3000:3000"            # Expose port 3000 for Next.js
+    depends_on:
+      - nodejs-analytics-app   # Ensure Node.js app is ready before starting Next.js
+    networks:
+      - my-network  
+    environment:
+      - NEXT_PUBLIC_API_URL=http://nodejs-analytics-app:4000  
+
+  nodejs-analytics-app:
+    image: test_nodejs-analytics-app
+    build:
+      context: ./analytics-service  # Path to your Node.js app
+    ports:
+      - "4000:4000"            # Expose port 4000 for the Node.js backend
+    environment:
+      - NODE_ENV=production    # Set environment variables for the Node.js app
+    networks:
+      - my-network  
+
+networks:
+  my-network:
+    driver: bridge

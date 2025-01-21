@@ -3,7 +3,7 @@ import React from 'react'
 const Footer = () => {
   return (
     <footer
-        className="bg-black text-white py-4 fixed bottom-0 w-full"
+        className="bg-black text-white py-4  w-full"
         style={{
           fontFamily: "'IBM Plex Sans', sans-serif",
           fontSize: "12px",
